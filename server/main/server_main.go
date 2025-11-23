@@ -8,6 +8,6 @@ import (
 func main() {
 	fmt.Println("Hello world from the server!")
 
-	result := math.Add(2, 2)
+	result := math.MagicAdd(2, 2)
 	fmt.Println("Two plus two is equal to: ", result)
 }

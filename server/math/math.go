@@ -1,5 +1,41 @@
 package math
 
-func Add(a, b int) int {
+func MagicAdd(a, b float64) float64 {
 	return a + b
+}
+
+func MagicSubtract(a, b float64) float64 {
+	return a - b
+}
+
+func MagicFindMin(a, b, c int) int {
+	if (a < b) && (a < c) {
+		return a
+	}
+
+	if (b < a) && (b < c) {
+		return b
+	}
+
+	if (c < a) && (c < b) {
+		return c
+	}
+
+	return a
+}
+
+func MagicFindMax(a, b, c int) int {
+	if (a > b) && (a > c) {
+		return a
+	}
+
+	if (b > a) && (b > c) {
+		return b
+	}
+
+	if (c > a) && (c > b) {
+		return c
+	}
+
+	return a
 }
