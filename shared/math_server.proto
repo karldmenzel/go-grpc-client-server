@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+option go_package="./shared";
+package shared;
+
+service MathServer {
+  rpc MagicAdd (DoubleTerms) returns (DoubleResult);
+  rpc MagicSubtract (DoubleTerms) returns (DoubleResult);
+  rpc MagicFindMin (IntTerms) returns (IntResult);
+  rpc MagicFindMax (IntTerms) returns (IntResult);
+}
+
+message DoubleTerms {
+  double termOne = 1;
+  double termTwo = 2;
+}
+
+message DoubleResult {
+  double result = 1;
+}
+
+message IntTerms {
+  sint64 termOne = 1;
+  sint64 termTwo = 2;
+  sint64 termThree = 3;
+}
+
+message IntResult {
+  sint64 result = 1;
+}

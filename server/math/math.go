@@ -8,7 +8,7 @@ func MagicSubtract(a, b float64) float64 {
 	return a - b
 }
 
-func MagicFindMin(a, b, c int) int {
+func MagicFindMin(a, b, c int64) int64 {
 	if (a < b) && (a < c) {
 		return a
 	}
@@ -24,7 +24,7 @@ func MagicFindMin(a, b, c int) int {
 	return a
 }
 
-func MagicFindMax(a, b, c int) int {
+func MagicFindMax(a, b, c int64) int64 {
 	if (a > b) && (a > c) {
 		return a
 	}

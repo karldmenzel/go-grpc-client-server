@@ -20,8 +20,8 @@ func TestMagicSubtract(t *testing.T) {
 
 func TestMagicFindMin(t *testing.T) {
 	tests := []struct {
-		a, b, c int
-		want    int
+		a, b, c int64
+		want    int64
 	}{
 		{3, 5, 7, 3},
 		{10, 2, 8, 2},
@@ -39,8 +39,8 @@ func TestMagicFindMin(t *testing.T) {
 
 func TestMagicFindMax(t *testing.T) {
 	tests := []struct {
-		a, b, c int
-		want    int
+		a, b, c int64
+		want    int64
 	}{
 		{3, 5, 7, 7},
 		{10, 2, 8, 10},
