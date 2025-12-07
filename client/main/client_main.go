@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"math/rand/v2"
+	"sync"
 	"time"
 
 	pb "go-grpc-client-server/shared"
@@ -11,6 +12,8 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 )
+
+var waitGroup sync.WaitGroup
 
 func main() {
 	// Set up a connection to the server.
@@ -21,6 +24,8 @@ func main() {
 	defer cancel()
 
 	make1000Requests(server, requestContext)
+
+	waitGroup.Wait()
 
 	getCounters(server, requestContext)
 }
@@ -48,13 +53,13 @@ func make1000Requests(server pb.MathServerClient, requestContext context.Context
 		methodId := rand.IntN(4)
 		switch methodId {
 		case 0:
-			magicAdd(server, requestContext)
+			waitGroup.Go(func() { magicAdd(server, requestContext) })
 		case 1:
-			magicSubtract(server, requestContext)
+			waitGroup.Go(func() { magicSubtract(server, requestContext) })
 		case 2:
-			magicFindMin(server, requestContext)
+			waitGroup.Go(func() { magicFindMin(server, requestContext) })
 		case 3:
-			magicFindMax(server, requestContext)
+			waitGroup.Go(func() { magicFindMax(server, requestContext) })
 		default:
 			panic("Random generation went out of range 0 - 3.")
 		}

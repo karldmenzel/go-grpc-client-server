@@ -7,6 +7,7 @@ import (
 	pb "go-grpc-client-server/shared"
 	"log"
 	"net"
+	"sync"
 
 	"google.golang.org/grpc"
 )
@@ -16,54 +17,85 @@ type server struct {
 }
 
 var (
-	magicAddCounter      int64 = 0
-	magicSubtractCounter int64 = 0
-	magicFindMinCounter  int64 = 0
-	magicFindMaxCounter  int64 = 0
+	addFuncCounter int64 = 0
+	subFuncCounter int64 = 0
+	minFuncCounter int64 = 0
+	maxFuncCounter int64 = 0
+)
+
+var (
+	addCounterMutex sync.Mutex
+	subCounterMutex sync.Mutex
+	minCounterMutex sync.Mutex
+	maxCounterMutex sync.Mutex
 )
 
 func (s *server) MagicAdd(_ context.Context, in *pb.DoubleTerms) (*pb.DoubleResult, error) {
-	magicAddCounter++
+	addCounterMutex.Lock()
+	addFuncCounter++
+	addCounterMutex.Unlock()
 
 	sum := math.MagicAdd(in.TermOne, in.TermTwo)
 	return &pb.DoubleResult{Result: sum}, nil
 }
 
 func (s *server) MagicSubtract(_ context.Context, in *pb.DoubleTerms) (*pb.DoubleResult, error) {
-	magicSubtractCounter++
+	subCounterMutex.Lock()
+	subFuncCounter++
+	subCounterMutex.Unlock()
 
 	difference := math.MagicSubtract(in.TermOne, in.TermTwo)
 	return &pb.DoubleResult{Result: difference}, nil
 }
 
 func (s *server) MagicFindMin(_ context.Context, in *pb.IntTerms) (*pb.IntResult, error) {
-	magicFindMinCounter++
+	minCounterMutex.Lock()
+	minFuncCounter++
+	minCounterMutex.Unlock()
 
 	minimum := math.MagicFindMin(in.TermOne, in.TermTwo, in.TermThree)
 	return &pb.IntResult{Result: minimum}, nil
 }
 
 func (s *server) MagicFindMax(_ context.Context, in *pb.IntTerms) (*pb.IntResult, error) {
-	magicFindMaxCounter++
+	maxCounterMutex.Lock()
+	maxFuncCounter++
+	maxCounterMutex.Unlock()
 
-	minimum := math.MagicFindMax(in.TermOne, in.TermTwo, in.TermThree)
-	return &pb.IntResult{Result: minimum}, nil
+	maximum := math.MagicFindMax(in.TermOne, in.TermTwo, in.TermThree)
+	return &pb.IntResult{Result: maximum}, nil
 }
 
 func (s *server) GetAddCount(_ context.Context, _ *pb.Empty) (*pb.Count, error) {
-	return &pb.Count{Count: magicAddCounter}, nil
+	addCounterMutex.Lock()
+	count := addFuncCounter
+	addCounterMutex.Unlock()
+
+	return &pb.Count{Count: count}, nil
 }
 
 func (s *server) GetSubCount(_ context.Context, _ *pb.Empty) (*pb.Count, error) {
-	return &pb.Count{Count: magicSubtractCounter}, nil
+	subCounterMutex.Lock()
+	count := subFuncCounter
+	subCounterMutex.Unlock()
+
+	return &pb.Count{Count: count}, nil
 }
 
 func (s *server) GetMinCount(_ context.Context, _ *pb.Empty) (*pb.Count, error) {
-	return &pb.Count{Count: magicFindMinCounter}, nil
+	minCounterMutex.Lock()
+	count := minFuncCounter
+	minCounterMutex.Unlock()
+
+	return &pb.Count{Count: count}, nil
 }
 
 func (s *server) GetMaxCount(_ context.Context, _ *pb.Empty) (*pb.Count, error) {
-	return &pb.Count{Count: magicFindMaxCounter}, nil
+	maxCounterMutex.Lock()
+	count := maxFuncCounter
+	maxCounterMutex.Unlock()
+
+	return &pb.Count{Count: count}, nil
 }
 
 func main() {
