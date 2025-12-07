@@ -2,8 +2,8 @@ package main
 
 import (
 	"context"
-	"flag"
-	"log"
+	"fmt"
+	"math/rand/v2"
 	"time"
 
 	pb "go-grpc-client-server/shared"
@@ -12,46 +12,61 @@ import (
 	"google.golang.org/grpc/credentials/insecure"
 )
 
-var (
-	addr = flag.String("addr", "localhost:50051", "the address to connect to")
-)
-
 func main() {
-	flag.Parse()
 	// Set up a connection to the server.
-	conn, err := grpc.NewClient(*addr, grpc.WithTransportCredentials(insecure.NewCredentials()))
+	serverAddress := "localhost:50051"
+	conn, err := grpc.NewClient(serverAddress, grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
-		log.Fatalf("did not connect: %v", err)
+		fmt.Printf("did not connect: %v\n", err)
 	}
 	defer conn.Close()
-	c := pb.NewMathServerClient(conn)
+	server := pb.NewMathServerClient(conn)
 
-	// Contact the server and print out its response.
+	// All requests should time out after one second.
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
 
-	sum, err := c.MagicAdd(ctx, &pb.DoubleTerms{TermOne: 5.0, TermTwo: 2.0})
-	if err != nil {
-		log.Fatalf("could not add: %v", err)
+	for range 1000 {
+		methodId := rand.IntN(4)
+		switch methodId {
+		case 0:
+			magicAdd(server, ctx)
+		case 1:
+			magicSubtract(server, ctx)
+		case 2:
+			magicFindMin(server, ctx)
+		case 3:
+			magicFindMax(server, ctx)
+		default:
+			panic("Random generation went out of range 0 - 3.")
+		}
 	}
-	log.Printf("Got a sum of: %v", sum.GetResult())
+}
 
-	difference, err := c.MagicSubtract(ctx, &pb.DoubleTerms{TermOne: 5.0, TermTwo: 2.0})
+func magicAdd(server pb.MathServerClient, requestContext context.Context) {
+	_, err := server.MagicAdd(requestContext, &pb.DoubleTerms{TermOne: 5.0, TermTwo: 2.0})
 	if err != nil {
-		log.Fatalf("could not subtract: %v", err)
+		panic("Error on MagicAdd.")
 	}
-	log.Printf("Got a difference of: %v", difference.GetResult())
+}
 
-	minimum, err := c.MagicFindMin(ctx, &pb.IntTerms{TermOne: 5.0, TermTwo: 2.0, TermThree: 3.0})
+func magicSubtract(server pb.MathServerClient, requestContext context.Context) {
+	_, err := server.MagicSubtract(requestContext, &pb.DoubleTerms{TermOne: 10.0, TermTwo: 5.0})
 	if err != nil {
-		log.Fatalf("could not find min: %v", err)
+		panic("Error on MagicSubtract.")
 	}
-	log.Printf("Got a min of: %v", minimum.GetResult())
+}
 
-	maximum, err := c.MagicFindMax(ctx, &pb.IntTerms{TermOne: 5.0, TermTwo: 2.0, TermThree: 3.0})
+func magicFindMin(server pb.MathServerClient, requestContext context.Context) {
+	_, err := server.MagicFindMin(requestContext, &pb.IntTerms{TermOne: 1.0, TermTwo: 2.0, TermThree: 5.0})
 	if err != nil {
-		log.Fatalf("could not find max: %v", err)
+		panic("Error on MagicFindMin.")
 	}
-	log.Printf("Got a max of: %v", maximum.GetResult())
+}
 
+func magicFindMax(server pb.MathServerClient, requestContext context.Context) {
+	_, err := server.MagicFindMax(requestContext, &pb.IntTerms{TermOne: 1.0, TermTwo: 2.0, TermThree: 5.0})
+	if err != nil {
+		panic("Error on MagicFindMin.")
+	}
 }
