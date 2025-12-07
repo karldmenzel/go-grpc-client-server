@@ -8,6 +8,11 @@ service MathServer {
   rpc MagicSubtract (DoubleTerms) returns (DoubleResult);
   rpc MagicFindMin (IntTerms) returns (IntResult);
   rpc MagicFindMax (IntTerms) returns (IntResult);
+
+  rpc GetAddCount (Empty) returns (Count);
+  rpc GetSubCount (Empty) returns (Count);
+  rpc GetMinCount (Empty) returns (Count);
+  rpc GetMaxCount (Empty) returns (Count);
 }
 
 message DoubleTerms {
@@ -27,4 +32,10 @@ message IntTerms {
 
 message IntResult {
   sint64 result = 1;
+}
+
+message Empty {}
+
+message Count {
+  sint64 count = 1;
 }

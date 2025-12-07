@@ -221,6 +221,86 @@ func (x *IntResult) GetResult() int64 {
 	return 0
 }
 
+type Empty struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Empty) Reset() {
+	*x = Empty{}
+	mi := &file_shared_math_server_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Empty) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Empty) ProtoMessage() {}
+
+func (x *Empty) ProtoReflect() protoreflect.Message {
+	mi := &file_shared_math_server_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Empty.ProtoReflect.Descriptor instead.
+func (*Empty) Descriptor() ([]byte, []int) {
+	return file_shared_math_server_proto_rawDescGZIP(), []int{4}
+}
+
+type Count struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Count         int64                  `protobuf:"zigzag64,1,opt,name=count,proto3" json:"count,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Count) Reset() {
+	*x = Count{}
+	mi := &file_shared_math_server_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Count) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Count) ProtoMessage() {}
+
+func (x *Count) ProtoReflect() protoreflect.Message {
+	mi := &file_shared_math_server_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Count.ProtoReflect.Descriptor instead.
+func (*Count) Descriptor() ([]byte, []int) {
+	return file_shared_math_server_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *Count) GetCount() int64 {
+	if x != nil {
+		return x.Count
+	}
+	return 0
+}
+
 var File_shared_math_server_proto protoreflect.FileDescriptor
 
 const file_shared_math_server_proto_rawDesc = "" +
@@ -236,13 +316,20 @@ const file_shared_math_server_proto_rawDesc = "" +
 	"\atermTwo\x18\x02 \x01(\x12R\atermTwo\x12\x1c\n" +
 	"\ttermThree\x18\x03 \x01(\x12R\ttermThree\"#\n" +
 	"\tIntResult\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\x12R\x06result2\xe9\x01\n" +
+	"\x06result\x18\x01 \x01(\x12R\x06result\"\a\n" +
+	"\x05Empty\"\x1d\n" +
+	"\x05Count\x12\x14\n" +
+	"\x05count\x18\x01 \x01(\x12R\x05count2\x9d\x03\n" +
 	"\n" +
 	"MathServer\x125\n" +
 	"\bMagicAdd\x12\x13.shared.DoubleTerms\x1a\x14.shared.DoubleResult\x12:\n" +
 	"\rMagicSubtract\x12\x13.shared.DoubleTerms\x1a\x14.shared.DoubleResult\x123\n" +
 	"\fMagicFindMin\x12\x10.shared.IntTerms\x1a\x11.shared.IntResult\x123\n" +
-	"\fMagicFindMax\x12\x10.shared.IntTerms\x1a\x11.shared.IntResultB\n" +
+	"\fMagicFindMax\x12\x10.shared.IntTerms\x1a\x11.shared.IntResult\x12+\n" +
+	"\vGetAddCount\x12\r.shared.Empty\x1a\r.shared.Count\x12+\n" +
+	"\vGetSubCount\x12\r.shared.Empty\x1a\r.shared.Count\x12+\n" +
+	"\vGetMinCount\x12\r.shared.Empty\x1a\r.shared.Count\x12+\n" +
+	"\vGetMaxCount\x12\r.shared.Empty\x1a\r.shared.CountB\n" +
 	"Z\b./sharedb\x06proto3"
 
 var (
@@ -257,24 +344,34 @@ func file_shared_math_server_proto_rawDescGZIP() []byte {
 	return file_shared_math_server_proto_rawDescData
 }
 
-var file_shared_math_server_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_shared_math_server_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_shared_math_server_proto_goTypes = []any{
 	(*DoubleTerms)(nil),  // 0: shared.DoubleTerms
 	(*DoubleResult)(nil), // 1: shared.DoubleResult
 	(*IntTerms)(nil),     // 2: shared.IntTerms
 	(*IntResult)(nil),    // 3: shared.IntResult
+	(*Empty)(nil),        // 4: shared.Empty
+	(*Count)(nil),        // 5: shared.Count
 }
 var file_shared_math_server_proto_depIdxs = []int32{
 	0, // 0: shared.MathServer.MagicAdd:input_type -> shared.DoubleTerms
 	0, // 1: shared.MathServer.MagicSubtract:input_type -> shared.DoubleTerms
 	2, // 2: shared.MathServer.MagicFindMin:input_type -> shared.IntTerms
 	2, // 3: shared.MathServer.MagicFindMax:input_type -> shared.IntTerms
-	1, // 4: shared.MathServer.MagicAdd:output_type -> shared.DoubleResult
-	1, // 5: shared.MathServer.MagicSubtract:output_type -> shared.DoubleResult
-	3, // 6: shared.MathServer.MagicFindMin:output_type -> shared.IntResult
-	3, // 7: shared.MathServer.MagicFindMax:output_type -> shared.IntResult
-	4, // [4:8] is the sub-list for method output_type
-	0, // [0:4] is the sub-list for method input_type
+	4, // 4: shared.MathServer.GetAddCount:input_type -> shared.Empty
+	4, // 5: shared.MathServer.GetSubCount:input_type -> shared.Empty
+	4, // 6: shared.MathServer.GetMinCount:input_type -> shared.Empty
+	4, // 7: shared.MathServer.GetMaxCount:input_type -> shared.Empty
+	1, // 8: shared.MathServer.MagicAdd:output_type -> shared.DoubleResult
+	1, // 9: shared.MathServer.MagicSubtract:output_type -> shared.DoubleResult
+	3, // 10: shared.MathServer.MagicFindMin:output_type -> shared.IntResult
+	3, // 11: shared.MathServer.MagicFindMax:output_type -> shared.IntResult
+	5, // 12: shared.MathServer.GetAddCount:output_type -> shared.Count
+	5, // 13: shared.MathServer.GetSubCount:output_type -> shared.Count
+	5, // 14: shared.MathServer.GetMinCount:output_type -> shared.Count
+	5, // 15: shared.MathServer.GetMaxCount:output_type -> shared.Count
+	8, // [8:16] is the sub-list for method output_type
+	0, // [0:8] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
@@ -291,7 +388,7 @@ func file_shared_math_server_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_shared_math_server_proto_rawDesc), len(file_shared_math_server_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   4,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

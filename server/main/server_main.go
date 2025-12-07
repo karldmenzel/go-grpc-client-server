@@ -16,14 +16,13 @@ type server struct {
 }
 
 var (
-	magicAddCounter      = 0
-	magicSubtractCounter = 0
-	magicFindMinCounter  = 0
-	magicFindMaxCounter  = 0
+	magicAddCounter      int64 = 0
+	magicSubtractCounter int64 = 0
+	magicFindMinCounter  int64 = 0
+	magicFindMaxCounter  int64 = 0
 )
 
 func (s *server) MagicAdd(_ context.Context, in *pb.DoubleTerms) (*pb.DoubleResult, error) {
-	fmt.Println("MagicAdd")
 	magicAddCounter++
 
 	sum := math.MagicAdd(in.TermOne, in.TermTwo)
@@ -31,7 +30,6 @@ func (s *server) MagicAdd(_ context.Context, in *pb.DoubleTerms) (*pb.DoubleResu
 }
 
 func (s *server) MagicSubtract(_ context.Context, in *pb.DoubleTerms) (*pb.DoubleResult, error) {
-	fmt.Println("MagicSubtract")
 	magicSubtractCounter++
 
 	difference := math.MagicSubtract(in.TermOne, in.TermTwo)
@@ -39,7 +37,6 @@ func (s *server) MagicSubtract(_ context.Context, in *pb.DoubleTerms) (*pb.Doubl
 }
 
 func (s *server) MagicFindMin(_ context.Context, in *pb.IntTerms) (*pb.IntResult, error) {
-	fmt.Println("MagicFindMin")
 	magicFindMinCounter++
 
 	minimum := math.MagicFindMin(in.TermOne, in.TermTwo, in.TermThree)
@@ -47,11 +44,26 @@ func (s *server) MagicFindMin(_ context.Context, in *pb.IntTerms) (*pb.IntResult
 }
 
 func (s *server) MagicFindMax(_ context.Context, in *pb.IntTerms) (*pb.IntResult, error) {
-	fmt.Println("MagicFindMax")
 	magicFindMaxCounter++
 
 	minimum := math.MagicFindMax(in.TermOne, in.TermTwo, in.TermThree)
 	return &pb.IntResult{Result: minimum}, nil
+}
+
+func (s *server) GetAddCount(_ context.Context, _ *pb.Empty) (*pb.Count, error) {
+	return &pb.Count{Count: magicAddCounter}, nil
+}
+
+func (s *server) GetSubCount(_ context.Context, _ *pb.Empty) (*pb.Count, error) {
+	return &pb.Count{Count: magicSubtractCounter}, nil
+}
+
+func (s *server) GetMinCount(_ context.Context, _ *pb.Empty) (*pb.Count, error) {
+	return &pb.Count{Count: magicFindMinCounter}, nil
+}
+
+func (s *server) GetMaxCount(_ context.Context, _ *pb.Empty) (*pb.Count, error) {
+	return &pb.Count{Count: magicFindMaxCounter}, nil
 }
 
 func main() {

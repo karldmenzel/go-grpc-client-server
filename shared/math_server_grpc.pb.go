@@ -23,6 +23,10 @@ const (
 	MathServer_MagicSubtract_FullMethodName = "/shared.MathServer/MagicSubtract"
 	MathServer_MagicFindMin_FullMethodName  = "/shared.MathServer/MagicFindMin"
 	MathServer_MagicFindMax_FullMethodName  = "/shared.MathServer/MagicFindMax"
+	MathServer_GetAddCount_FullMethodName   = "/shared.MathServer/GetAddCount"
+	MathServer_GetSubCount_FullMethodName   = "/shared.MathServer/GetSubCount"
+	MathServer_GetMinCount_FullMethodName   = "/shared.MathServer/GetMinCount"
+	MathServer_GetMaxCount_FullMethodName   = "/shared.MathServer/GetMaxCount"
 )
 
 // MathServerClient is the client API for MathServer service.
@@ -33,6 +37,10 @@ type MathServerClient interface {
 	MagicSubtract(ctx context.Context, in *DoubleTerms, opts ...grpc.CallOption) (*DoubleResult, error)
 	MagicFindMin(ctx context.Context, in *IntTerms, opts ...grpc.CallOption) (*IntResult, error)
 	MagicFindMax(ctx context.Context, in *IntTerms, opts ...grpc.CallOption) (*IntResult, error)
+	GetAddCount(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Count, error)
+	GetSubCount(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Count, error)
+	GetMinCount(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Count, error)
+	GetMaxCount(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Count, error)
 }
 
 type mathServerClient struct {
@@ -83,6 +91,46 @@ func (c *mathServerClient) MagicFindMax(ctx context.Context, in *IntTerms, opts 
 	return out, nil
 }
 
+func (c *mathServerClient) GetAddCount(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Count, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Count)
+	err := c.cc.Invoke(ctx, MathServer_GetAddCount_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *mathServerClient) GetSubCount(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Count, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Count)
+	err := c.cc.Invoke(ctx, MathServer_GetSubCount_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *mathServerClient) GetMinCount(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Count, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Count)
+	err := c.cc.Invoke(ctx, MathServer_GetMinCount_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *mathServerClient) GetMaxCount(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Count, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Count)
+	err := c.cc.Invoke(ctx, MathServer_GetMaxCount_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MathServerServer is the server API for MathServer service.
 // All implementations must embed UnimplementedMathServerServer
 // for forward compatibility.
@@ -91,6 +139,10 @@ type MathServerServer interface {
 	MagicSubtract(context.Context, *DoubleTerms) (*DoubleResult, error)
 	MagicFindMin(context.Context, *IntTerms) (*IntResult, error)
 	MagicFindMax(context.Context, *IntTerms) (*IntResult, error)
+	GetAddCount(context.Context, *Empty) (*Count, error)
+	GetSubCount(context.Context, *Empty) (*Count, error)
+	GetMinCount(context.Context, *Empty) (*Count, error)
+	GetMaxCount(context.Context, *Empty) (*Count, error)
 	mustEmbedUnimplementedMathServerServer()
 }
 
@@ -112,6 +164,18 @@ func (UnimplementedMathServerServer) MagicFindMin(context.Context, *IntTerms) (*
 }
 func (UnimplementedMathServerServer) MagicFindMax(context.Context, *IntTerms) (*IntResult, error) {
 	return nil, status.Error(codes.Unimplemented, "method MagicFindMax not implemented")
+}
+func (UnimplementedMathServerServer) GetAddCount(context.Context, *Empty) (*Count, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetAddCount not implemented")
+}
+func (UnimplementedMathServerServer) GetSubCount(context.Context, *Empty) (*Count, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetSubCount not implemented")
+}
+func (UnimplementedMathServerServer) GetMinCount(context.Context, *Empty) (*Count, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetMinCount not implemented")
+}
+func (UnimplementedMathServerServer) GetMaxCount(context.Context, *Empty) (*Count, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetMaxCount not implemented")
 }
 func (UnimplementedMathServerServer) mustEmbedUnimplementedMathServerServer() {}
 func (UnimplementedMathServerServer) testEmbeddedByValue()                    {}
@@ -206,6 +270,78 @@ func _MathServer_MagicFindMax_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _MathServer_GetAddCount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MathServerServer).GetAddCount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MathServer_GetAddCount_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MathServerServer).GetAddCount(ctx, req.(*Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MathServer_GetSubCount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MathServerServer).GetSubCount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MathServer_GetSubCount_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MathServerServer).GetSubCount(ctx, req.(*Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MathServer_GetMinCount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MathServerServer).GetMinCount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MathServer_GetMinCount_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MathServerServer).GetMinCount(ctx, req.(*Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MathServer_GetMaxCount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MathServerServer).GetMaxCount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MathServer_GetMaxCount_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MathServerServer).GetMaxCount(ctx, req.(*Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // MathServer_ServiceDesc is the grpc.ServiceDesc for MathServer service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -228,6 +364,22 @@ var MathServer_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "MagicFindMax",
 			Handler:    _MathServer_MagicFindMax_Handler,
+		},
+		{
+			MethodName: "GetAddCount",
+			Handler:    _MathServer_GetAddCount_Handler,
+		},
+		{
+			MethodName: "GetSubCount",
+			Handler:    _MathServer_GetSubCount_Handler,
+		},
+		{
+			MethodName: "GetMinCount",
+			Handler:    _MathServer_GetMinCount_Handler,
+		},
+		{
+			MethodName: "GetMaxCount",
+			Handler:    _MathServer_GetMaxCount_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

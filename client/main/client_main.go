@@ -14,29 +14,47 @@ import (
 
 func main() {
 	// Set up a connection to the server.
-	serverAddress := "localhost:50051"
-	conn, err := grpc.NewClient(serverAddress, grpc.WithTransportCredentials(insecure.NewCredentials()))
-	if err != nil {
-		fmt.Printf("did not connect: %v\n", err)
-	}
+	conn, server := connectToServer("localhost:50051")
 	defer conn.Close()
-	server := pb.NewMathServerClient(conn)
 
-	// All requests should time out after one second.
-	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
+	requestContext, cancel := createRequestContext()
 	defer cancel()
 
+	make1000Requests(server, requestContext)
+
+	getCounters(server, requestContext)
+}
+
+func connectToServer(serverAddress string) (*grpc.ClientConn, pb.MathServerClient) {
+
+	connection, err := grpc.NewClient(serverAddress, grpc.WithTransportCredentials(insecure.NewCredentials()))
+	if err != nil {
+		panic(fmt.Errorf("failed to connect to server: %v", err))
+	}
+
+	server := pb.NewMathServerClient(connection)
+
+	return connection, server
+}
+
+func createRequestContext() (context.Context, context.CancelFunc) {
+	// All requests should time out after one second.
+	return context.WithTimeout(context.Background(), time.Second)
+
+}
+
+func make1000Requests(server pb.MathServerClient, requestContext context.Context) {
 	for range 1000 {
 		methodId := rand.IntN(4)
 		switch methodId {
 		case 0:
-			magicAdd(server, ctx)
+			magicAdd(server, requestContext)
 		case 1:
-			magicSubtract(server, ctx)
+			magicSubtract(server, requestContext)
 		case 2:
-			magicFindMin(server, ctx)
+			magicFindMin(server, requestContext)
 		case 3:
-			magicFindMax(server, ctx)
+			magicFindMax(server, requestContext)
 		default:
 			panic("Random generation went out of range 0 - 3.")
 		}
@@ -69,4 +87,20 @@ func magicFindMax(server pb.MathServerClient, requestContext context.Context) {
 	if err != nil {
 		panic("Error on MagicFindMin.")
 	}
+}
+
+func getCounters(server pb.MathServerClient, requestContext context.Context) {
+	addCount, err := server.GetAddCount(requestContext, &pb.Empty{})
+	subCount, err := server.GetSubCount(requestContext, &pb.Empty{})
+	minCount, err := server.GetMinCount(requestContext, &pb.Empty{})
+	maxCount, err := server.GetMaxCount(requestContext, &pb.Empty{})
+	if err != nil {
+		fmt.Printf("Error getting counts: %v\n", err)
+	}
+
+	fmt.Printf("Add count: %d\n", addCount.Count)
+	fmt.Printf("Sub count: %d\n", subCount.Count)
+	fmt.Printf("Min count: %d\n", minCount.Count)
+	fmt.Printf("Max count: %d\n", maxCount.Count)
+	fmt.Printf("Total request count: %d\n", addCount.Count+subCount.Count+minCount.Count+maxCount.Count)
 }
