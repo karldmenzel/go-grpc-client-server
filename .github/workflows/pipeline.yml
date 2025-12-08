@@ -14,4 +14,4 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - name: Run client and server
-        run: go run server/main/server_main.go & go run client/main/client_main.go
+        run: go run server/main/server_main.go & (sleep 5 && go run client/main/client_main.go)
