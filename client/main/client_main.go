@@ -8,7 +8,7 @@ import (
 	"sync"
 	"time"
 
-	magicInterface "go-grpc-client-server/shared"
+	pb "github.com/karldmenzel/go-grpc-client-server/magicMath"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
@@ -41,7 +41,7 @@ func main() {
 // This function takes the URL of the server, and returns the raw connection object, and our server's object.
 // The connection object is returned strictly so that it can be closed by the main function.
 // The server object is what actually has the remote procedures exposed on it, and is what we will call.
-func connectToServer(serverAddress string) (*grpc.ClientConn, magicInterface.MathServerClient) {
+func connectToServer(serverAddress string) (*grpc.ClientConn, pb.MagicMathClient) {
 
 	// Create a new gRPC connection with no authentication.
 	connection, err := grpc.NewClient(serverAddress, grpc.WithTransportCredentials(insecure.NewCredentials()))
@@ -50,7 +50,7 @@ func connectToServer(serverAddress string) (*grpc.ClientConn, magicInterface.Mat
 	}
 
 	// This is the object which actually has the remote functions on it.
-	server := magicInterface.NewMathServerClient(connection)
+	server := pb.NewMagicMathClient(connection)
 
 	return connection, server
 }
@@ -64,7 +64,7 @@ func createRequestContext() (context.Context, context.CancelFunc) {
 // This function makes 1000 requests to the server for a random function.
 // Each call is made in a go routine, which all run concurrently.
 // These go routines are grouped in a 'wait group', which allows us to wait for them all to finish.
-func make1000Requests(server magicInterface.MathServerClient, requestContext context.Context) {
+func make1000Requests(server pb.MagicMathClient, requestContext context.Context) {
 	for range 1000 {
 		methodId := rand.IntN(4)
 		switch methodId {
@@ -83,32 +83,32 @@ func make1000Requests(server magicInterface.MathServerClient, requestContext con
 }
 
 // This function makes the gRPC addition call to the server using two random doubles.
-func magicAdd(server magicInterface.MathServerClient, requestContext context.Context) {
-	_, err := server.MagicAdd(requestContext, &magicInterface.DoubleTerms{TermOne: randomDouble(), TermTwo: randomDouble()})
+func magicAdd(server pb.MagicMathClient, requestContext context.Context) {
+	_, err := server.MagicAdd(requestContext, &pb.DoubleTerms{TermOne: randomDouble(), TermTwo: randomDouble()})
 	if err != nil {
 		panic("Error on MagicAdd.")
 	}
 }
 
 // This function makes the gRPC subtraction call to the server using two random doubles.
-func magicSubtract(server magicInterface.MathServerClient, requestContext context.Context) {
-	_, err := server.MagicSubtract(requestContext, &magicInterface.DoubleTerms{TermOne: randomDouble(), TermTwo: randomDouble()})
+func magicSubtract(server pb.MagicMathClient, requestContext context.Context) {
+	_, err := server.MagicSubtract(requestContext, &pb.DoubleTerms{TermOne: randomDouble(), TermTwo: randomDouble()})
 	if err != nil {
 		panic("Error on MagicSubtract.")
 	}
 }
 
 // This function makes the gRPC min call to the server using three random integers.
-func magicFindMin(server magicInterface.MathServerClient, requestContext context.Context) {
-	_, err := server.MagicFindMin(requestContext, &magicInterface.IntTerms{TermOne: randomInt(), TermTwo: randomInt(), TermThree: randomInt()})
+func magicFindMin(server pb.MagicMathClient, requestContext context.Context) {
+	_, err := server.MagicFindMin(requestContext, &pb.IntTerms{TermOne: randomInt(), TermTwo: randomInt(), TermThree: randomInt()})
 	if err != nil {
 		panic("Error on MagicFindMin.")
 	}
 }
 
 // This function makes the gRPC max call to the server using three random integers.
-func magicFindMax(server magicInterface.MathServerClient, requestContext context.Context) {
-	_, err := server.MagicFindMax(requestContext, &magicInterface.IntTerms{TermOne: randomInt(), TermTwo: randomInt(), TermThree: randomInt()})
+func magicFindMax(server pb.MagicMathClient, requestContext context.Context) {
+	_, err := server.MagicFindMax(requestContext, &pb.IntTerms{TermOne: randomInt(), TermTwo: randomInt(), TermThree: randomInt()})
 	if err != nil {
 		panic("Error on MagicFindMin.")
 	}
@@ -126,11 +126,11 @@ func randomInt() int64 {
 }
 
 // This function calls four gRPC methods to get the counter for each method, print them all, and then print the total.
-func getCounters(server magicInterface.MathServerClient, requestContext context.Context) {
-	addCount, err := server.GetAddCount(requestContext, &magicInterface.Empty{})
-	subCount, err := server.GetSubCount(requestContext, &magicInterface.Empty{})
-	minCount, err := server.GetMinCount(requestContext, &magicInterface.Empty{})
-	maxCount, err := server.GetMaxCount(requestContext, &magicInterface.Empty{})
+func getCounters(server pb.MagicMathClient, requestContext context.Context) {
+	addCount, err := server.GetAddCount(requestContext, &pb.Empty{})
+	subCount, err := server.GetSubCount(requestContext, &pb.Empty{})
+	minCount, err := server.GetMinCount(requestContext, &pb.Empty{})
+	maxCount, err := server.GetMaxCount(requestContext, &pb.Empty{})
 	if err != nil {
 		fmt.Printf("Error getting counts: %v\n", err)
 	}

@@ -1,4 +1,4 @@
-module go-grpc-client-server
+module github.com/karldmenzel/go-grpc-client-server
 
 go 1.25
 

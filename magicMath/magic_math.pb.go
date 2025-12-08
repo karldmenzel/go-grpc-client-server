@@ -2,9 +2,9 @@
 // versions:
 // 	protoc-gen-go v1.36.10
 // 	protoc        v6.33.1
-// source: shared/math_server.proto
+// source: magicMath/magic_math.proto
 
-package shared
+package magicMath
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -31,7 +31,7 @@ type DoubleTerms struct {
 
 func (x *DoubleTerms) Reset() {
 	*x = DoubleTerms{}
-	mi := &file_shared_math_server_proto_msgTypes[0]
+	mi := &file_magicMath_magic_math_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -43,7 +43,7 @@ func (x *DoubleTerms) String() string {
 func (*DoubleTerms) ProtoMessage() {}
 
 func (x *DoubleTerms) ProtoReflect() protoreflect.Message {
-	mi := &file_shared_math_server_proto_msgTypes[0]
+	mi := &file_magicMath_magic_math_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -56,7 +56,7 @@ func (x *DoubleTerms) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DoubleTerms.ProtoReflect.Descriptor instead.
 func (*DoubleTerms) Descriptor() ([]byte, []int) {
-	return file_shared_math_server_proto_rawDescGZIP(), []int{0}
+	return file_magicMath_magic_math_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *DoubleTerms) GetTermOne() float64 {
@@ -82,7 +82,7 @@ type DoubleResult struct {
 
 func (x *DoubleResult) Reset() {
 	*x = DoubleResult{}
-	mi := &file_shared_math_server_proto_msgTypes[1]
+	mi := &file_magicMath_magic_math_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -94,7 +94,7 @@ func (x *DoubleResult) String() string {
 func (*DoubleResult) ProtoMessage() {}
 
 func (x *DoubleResult) ProtoReflect() protoreflect.Message {
-	mi := &file_shared_math_server_proto_msgTypes[1]
+	mi := &file_magicMath_magic_math_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -107,7 +107,7 @@ func (x *DoubleResult) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DoubleResult.ProtoReflect.Descriptor instead.
 func (*DoubleResult) Descriptor() ([]byte, []int) {
-	return file_shared_math_server_proto_rawDescGZIP(), []int{1}
+	return file_magicMath_magic_math_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *DoubleResult) GetResult() float64 {
@@ -128,7 +128,7 @@ type IntTerms struct {
 
 func (x *IntTerms) Reset() {
 	*x = IntTerms{}
-	mi := &file_shared_math_server_proto_msgTypes[2]
+	mi := &file_magicMath_magic_math_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -140,7 +140,7 @@ func (x *IntTerms) String() string {
 func (*IntTerms) ProtoMessage() {}
 
 func (x *IntTerms) ProtoReflect() protoreflect.Message {
-	mi := &file_shared_math_server_proto_msgTypes[2]
+	mi := &file_magicMath_magic_math_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -153,7 +153,7 @@ func (x *IntTerms) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IntTerms.ProtoReflect.Descriptor instead.
 func (*IntTerms) Descriptor() ([]byte, []int) {
-	return file_shared_math_server_proto_rawDescGZIP(), []int{2}
+	return file_magicMath_magic_math_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *IntTerms) GetTermOne() int64 {
@@ -186,7 +186,7 @@ type IntResult struct {
 
 func (x *IntResult) Reset() {
 	*x = IntResult{}
-	mi := &file_shared_math_server_proto_msgTypes[3]
+	mi := &file_magicMath_magic_math_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -198,7 +198,7 @@ func (x *IntResult) String() string {
 func (*IntResult) ProtoMessage() {}
 
 func (x *IntResult) ProtoReflect() protoreflect.Message {
-	mi := &file_shared_math_server_proto_msgTypes[3]
+	mi := &file_magicMath_magic_math_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -211,7 +211,7 @@ func (x *IntResult) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IntResult.ProtoReflect.Descriptor instead.
 func (*IntResult) Descriptor() ([]byte, []int) {
-	return file_shared_math_server_proto_rawDescGZIP(), []int{3}
+	return file_magicMath_magic_math_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *IntResult) GetResult() int64 {
@@ -229,7 +229,7 @@ type Empty struct {
 
 func (x *Empty) Reset() {
 	*x = Empty{}
-	mi := &file_shared_math_server_proto_msgTypes[4]
+	mi := &file_magicMath_magic_math_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -241,7 +241,7 @@ func (x *Empty) String() string {
 func (*Empty) ProtoMessage() {}
 
 func (x *Empty) ProtoReflect() protoreflect.Message {
-	mi := &file_shared_math_server_proto_msgTypes[4]
+	mi := &file_magicMath_magic_math_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -254,7 +254,7 @@ func (x *Empty) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Empty.ProtoReflect.Descriptor instead.
 func (*Empty) Descriptor() ([]byte, []int) {
-	return file_shared_math_server_proto_rawDescGZIP(), []int{4}
+	return file_magicMath_magic_math_proto_rawDescGZIP(), []int{4}
 }
 
 type Count struct {
@@ -266,7 +266,7 @@ type Count struct {
 
 func (x *Count) Reset() {
 	*x = Count{}
-	mi := &file_shared_math_server_proto_msgTypes[5]
+	mi := &file_magicMath_magic_math_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -278,7 +278,7 @@ func (x *Count) String() string {
 func (*Count) ProtoMessage() {}
 
 func (x *Count) ProtoReflect() protoreflect.Message {
-	mi := &file_shared_math_server_proto_msgTypes[5]
+	mi := &file_magicMath_magic_math_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -291,7 +291,7 @@ func (x *Count) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Count.ProtoReflect.Descriptor instead.
 func (*Count) Descriptor() ([]byte, []int) {
-	return file_shared_math_server_proto_rawDescGZIP(), []int{5}
+	return file_magicMath_magic_math_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *Count) GetCount() int64 {
@@ -301,11 +301,11 @@ func (x *Count) GetCount() int64 {
 	return 0
 }
 
-var File_shared_math_server_proto protoreflect.FileDescriptor
+var File_magicMath_magic_math_proto protoreflect.FileDescriptor
 
-const file_shared_math_server_proto_rawDesc = "" +
+const file_magicMath_magic_math_proto_rawDesc = "" +
 	"\n" +
-	"\x18shared/math_server.proto\x12\x06shared\"A\n" +
+	"\x1amagicMath/magic_math.proto\x12\x06shared\"A\n" +
 	"\vDoubleTerms\x12\x18\n" +
 	"\atermOne\x18\x01 \x01(\x01R\atermOne\x12\x18\n" +
 	"\atermTwo\x18\x02 \x01(\x01R\atermTwo\"&\n" +
@@ -319,9 +319,8 @@ const file_shared_math_server_proto_rawDesc = "" +
 	"\x06result\x18\x01 \x01(\x12R\x06result\"\a\n" +
 	"\x05Empty\"\x1d\n" +
 	"\x05Count\x12\x14\n" +
-	"\x05count\x18\x01 \x01(\x12R\x05count2\x9d\x03\n" +
-	"\n" +
-	"MathServer\x125\n" +
+	"\x05count\x18\x01 \x01(\x12R\x05count2\x9c\x03\n" +
+	"\tMagicMath\x125\n" +
 	"\bMagicAdd\x12\x13.shared.DoubleTerms\x1a\x14.shared.DoubleResult\x12:\n" +
 	"\rMagicSubtract\x12\x13.shared.DoubleTerms\x1a\x14.shared.DoubleResult\x123\n" +
 	"\fMagicFindMin\x12\x10.shared.IntTerms\x1a\x11.shared.IntResult\x123\n" +
@@ -329,23 +328,22 @@ const file_shared_math_server_proto_rawDesc = "" +
 	"\vGetAddCount\x12\r.shared.Empty\x1a\r.shared.Count\x12+\n" +
 	"\vGetSubCount\x12\r.shared.Empty\x1a\r.shared.Count\x12+\n" +
 	"\vGetMinCount\x12\r.shared.Empty\x1a\r.shared.Count\x12+\n" +
-	"\vGetMaxCount\x12\r.shared.Empty\x1a\r.shared.CountB\n" +
-	"Z\b./sharedb\x06proto3"
+	"\vGetMaxCount\x12\r.shared.Empty\x1a\r.shared.CountB\rZ\v./magicMathb\x06proto3"
 
 var (
-	file_shared_math_server_proto_rawDescOnce sync.Once
-	file_shared_math_server_proto_rawDescData []byte
+	file_magicMath_magic_math_proto_rawDescOnce sync.Once
+	file_magicMath_magic_math_proto_rawDescData []byte
 )
 
-func file_shared_math_server_proto_rawDescGZIP() []byte {
-	file_shared_math_server_proto_rawDescOnce.Do(func() {
-		file_shared_math_server_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_shared_math_server_proto_rawDesc), len(file_shared_math_server_proto_rawDesc)))
+func file_magicMath_magic_math_proto_rawDescGZIP() []byte {
+	file_magicMath_magic_math_proto_rawDescOnce.Do(func() {
+		file_magicMath_magic_math_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_magicMath_magic_math_proto_rawDesc), len(file_magicMath_magic_math_proto_rawDesc)))
 	})
-	return file_shared_math_server_proto_rawDescData
+	return file_magicMath_magic_math_proto_rawDescData
 }
 
-var file_shared_math_server_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
-var file_shared_math_server_proto_goTypes = []any{
+var file_magicMath_magic_math_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_magicMath_magic_math_proto_goTypes = []any{
 	(*DoubleTerms)(nil),  // 0: shared.DoubleTerms
 	(*DoubleResult)(nil), // 1: shared.DoubleResult
 	(*IntTerms)(nil),     // 2: shared.IntTerms
@@ -353,23 +351,23 @@ var file_shared_math_server_proto_goTypes = []any{
 	(*Empty)(nil),        // 4: shared.Empty
 	(*Count)(nil),        // 5: shared.Count
 }
-var file_shared_math_server_proto_depIdxs = []int32{
-	0, // 0: shared.MathServer.MagicAdd:input_type -> shared.DoubleTerms
-	0, // 1: shared.MathServer.MagicSubtract:input_type -> shared.DoubleTerms
-	2, // 2: shared.MathServer.MagicFindMin:input_type -> shared.IntTerms
-	2, // 3: shared.MathServer.MagicFindMax:input_type -> shared.IntTerms
-	4, // 4: shared.MathServer.GetAddCount:input_type -> shared.Empty
-	4, // 5: shared.MathServer.GetSubCount:input_type -> shared.Empty
-	4, // 6: shared.MathServer.GetMinCount:input_type -> shared.Empty
-	4, // 7: shared.MathServer.GetMaxCount:input_type -> shared.Empty
-	1, // 8: shared.MathServer.MagicAdd:output_type -> shared.DoubleResult
-	1, // 9: shared.MathServer.MagicSubtract:output_type -> shared.DoubleResult
-	3, // 10: shared.MathServer.MagicFindMin:output_type -> shared.IntResult
-	3, // 11: shared.MathServer.MagicFindMax:output_type -> shared.IntResult
-	5, // 12: shared.MathServer.GetAddCount:output_type -> shared.Count
-	5, // 13: shared.MathServer.GetSubCount:output_type -> shared.Count
-	5, // 14: shared.MathServer.GetMinCount:output_type -> shared.Count
-	5, // 15: shared.MathServer.GetMaxCount:output_type -> shared.Count
+var file_magicMath_magic_math_proto_depIdxs = []int32{
+	0, // 0: shared.MagicMath.MagicAdd:input_type -> shared.DoubleTerms
+	0, // 1: shared.MagicMath.MagicSubtract:input_type -> shared.DoubleTerms
+	2, // 2: shared.MagicMath.MagicFindMin:input_type -> shared.IntTerms
+	2, // 3: shared.MagicMath.MagicFindMax:input_type -> shared.IntTerms
+	4, // 4: shared.MagicMath.GetAddCount:input_type -> shared.Empty
+	4, // 5: shared.MagicMath.GetSubCount:input_type -> shared.Empty
+	4, // 6: shared.MagicMath.GetMinCount:input_type -> shared.Empty
+	4, // 7: shared.MagicMath.GetMaxCount:input_type -> shared.Empty
+	1, // 8: shared.MagicMath.MagicAdd:output_type -> shared.DoubleResult
+	1, // 9: shared.MagicMath.MagicSubtract:output_type -> shared.DoubleResult
+	3, // 10: shared.MagicMath.MagicFindMin:output_type -> shared.IntResult
+	3, // 11: shared.MagicMath.MagicFindMax:output_type -> shared.IntResult
+	5, // 12: shared.MagicMath.GetAddCount:output_type -> shared.Count
+	5, // 13: shared.MagicMath.GetSubCount:output_type -> shared.Count
+	5, // 14: shared.MagicMath.GetMinCount:output_type -> shared.Count
+	5, // 15: shared.MagicMath.GetMaxCount:output_type -> shared.Count
 	8, // [8:16] is the sub-list for method output_type
 	0, // [0:8] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
@@ -377,26 +375,26 @@ var file_shared_math_server_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for field type_name
 }
 
-func init() { file_shared_math_server_proto_init() }
-func file_shared_math_server_proto_init() {
-	if File_shared_math_server_proto != nil {
+func init() { file_magicMath_magic_math_proto_init() }
+func file_magicMath_magic_math_proto_init() {
+	if File_magicMath_magic_math_proto != nil {
 		return
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_shared_math_server_proto_rawDesc), len(file_shared_math_server_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_magicMath_magic_math_proto_rawDesc), len(file_magicMath_magic_math_proto_rawDesc)),
 			NumEnums:      0,
 			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_shared_math_server_proto_goTypes,
-		DependencyIndexes: file_shared_math_server_proto_depIdxs,
-		MessageInfos:      file_shared_math_server_proto_msgTypes,
+		GoTypes:           file_magicMath_magic_math_proto_goTypes,
+		DependencyIndexes: file_magicMath_magic_math_proto_depIdxs,
+		MessageInfos:      file_magicMath_magic_math_proto_msgTypes,
 	}.Build()
-	File_shared_math_server_proto = out.File
-	file_shared_math_server_proto_goTypes = nil
-	file_shared_math_server_proto_depIdxs = nil
+	File_magicMath_magic_math_proto = out.File
+	file_magicMath_magic_math_proto_goTypes = nil
+	file_magicMath_magic_math_proto_depIdxs = nil
 }

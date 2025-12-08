@@ -1,9 +1,9 @@
 syntax = "proto3";
 
-option go_package="./shared";
+option go_package="./magicMath";
 package shared;
 
-service MathServer {
+service MagicMath {
   // These four remote functions are what the client will use to call the server to do the math.
   rpc MagicAdd (DoubleTerms) returns (DoubleResult);
   rpc MagicSubtract (DoubleTerms) returns (DoubleResult);
