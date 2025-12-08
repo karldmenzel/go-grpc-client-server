@@ -1,14 +1,14 @@
 package math
 
-func MagicAdd(a, b float64) float64 {
+func LocalAdd(a, b float64) float64 {
 	return a + b
 }
 
-func MagicSubtract(a, b float64) float64 {
+func LocalSubtract(a, b float64) float64 {
 	return a - b
 }
 
-func MagicFindMin(a, b, c int64) int64 {
+func LocalFindMin(a, b, c int64) int64 {
 	if (a < b) && (a < c) {
 		return a
 	}
@@ -24,7 +24,7 @@ func MagicFindMin(a, b, c int64) int64 {
 	return a
 }
 
-func MagicFindMax(a, b, c int64) int64 {
+func LocalFindMax(a, b, c int64) int64 {
 	if (a > b) && (a > c) {
 		return a
 	}

@@ -2,23 +2,23 @@ package math
 
 import "testing"
 
-func TestMagicAdd(t *testing.T) {
-	result := MagicAdd(2.5, 3.5)
+func TestLocalAdd(t *testing.T) {
+	result := LocalAdd(2.5, 3.5)
 	expected := 6.0
 	if result != expected {
-		t.Errorf("MagicAdd(2.5, 3.5) = %v; want %v", result, expected)
+		t.Errorf("LocalAdd(2.5, 3.5) = %v; want %v", result, expected)
 	}
 }
 
-func TestMagicSubtract(t *testing.T) {
-	result := MagicSubtract(10, 3)
+func TestLocalSubtract(t *testing.T) {
+	result := LocalSubtract(10, 3)
 	expected := 7.0
 	if result != expected {
-		t.Errorf("MagicSubtract(10, 3) = %v; want %v", result, expected)
+		t.Errorf("LocalSubtract(10, 3) = %v; want %v", result, expected)
 	}
 }
 
-func TestMagicFindMin(t *testing.T) {
+func TestLocalFindMin(t *testing.T) {
 	tests := []struct {
 		a, b, c int64
 		want    int64
@@ -29,15 +29,15 @@ func TestMagicFindMin(t *testing.T) {
 	}
 
 	for _, tt := range tests {
-		got := MagicFindMin(tt.a, tt.b, tt.c)
+		got := LocalFindMin(tt.a, tt.b, tt.c)
 		if got != tt.want {
-			t.Errorf("MagicFindMin(%d, %d, %d) = %d; want %d",
+			t.Errorf("LocalFindMin(%d, %d, %d) = %d; want %d",
 				tt.a, tt.b, tt.c, got, tt.want)
 		}
 	}
 }
 
-func TestMagicFindMax(t *testing.T) {
+func TestLocalFindMax(t *testing.T) {
 	tests := []struct {
 		a, b, c int64
 		want    int64
@@ -48,9 +48,9 @@ func TestMagicFindMax(t *testing.T) {
 	}
 
 	for _, tt := range tests {
-		got := MagicFindMax(tt.a, tt.b, tt.c)
+		got := LocalFindMax(tt.a, tt.b, tt.c)
 		if got != tt.want {
-			t.Errorf("MagicFindMax(%d, %d, %d) = %d; want %d",
+			t.Errorf("LocalFindMax(%d, %d, %d) = %d; want %d",
 				tt.a, tt.b, tt.c, got, tt.want)
 		}
 	}

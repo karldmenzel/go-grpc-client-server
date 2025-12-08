@@ -4,11 +4,13 @@ option go_package="./shared";
 package shared;
 
 service MathServer {
+  // These four remote functions are what the client will use to call the server to do the math.
   rpc MagicAdd (DoubleTerms) returns (DoubleResult);
   rpc MagicSubtract (DoubleTerms) returns (DoubleResult);
   rpc MagicFindMin (IntTerms) returns (IntResult);
   rpc MagicFindMax (IntTerms) returns (IntResult);
 
+  // These four remote functions will be used by the client to get the counters from the server.
   rpc GetAddCount (Empty) returns (Count);
   rpc GetSubCount (Empty) returns (Count);
   rpc GetMinCount (Empty) returns (Count);
